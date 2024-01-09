@@ -10,14 +10,14 @@ def coloringAlg (value):
     :param value: numeric value of the point (x-coordinate)
     :return: color_num
     '''
+    global maxCol
     p = Point(value)
     #~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
     #your ALG here...
 
-
-    color_num = int(random.random()*50)
+    color_num = maxCol
 
 
     #~~~~~~~~~~~~~~~~~~~~
