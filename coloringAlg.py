@@ -1,3 +1,5 @@
+import random
+
 from Point import Point
 
 maxCol = 0
@@ -15,7 +17,7 @@ def coloringAlg (value):
     #your ALG here...
 
 
-    color_num = maxCol
+    color_num = int(random.random()*50)
 
 
     #~~~~~~~~~~~~~~~~~~~~
