@@ -2,8 +2,8 @@ from Point import Point
 
 maxCol = 0
 points = []
-isOnlineAlg = True      #if RectangleAlg: =False
-
+isOnlineAlg = False      #if RectangleAlg: =False
+STUDENTS_ID="123456789_987654321"   #change IDs
 
 def onlineColoringAlg(value):
     """
