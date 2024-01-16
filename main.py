@@ -2,15 +2,18 @@ from Point import Point
 from coloringAlg import points, maxCol, coloringAlg
 import random
 
+def runValues(n):
 # Generate a list of 100 random values
-random_values = [random.random()*100 for _ in range(100)]
-print(random_values[:5])  # Display the first 5 values for a quick check
+    random_values = [random.random()*100 for _ in range(n)]
+    # print(random_values[:5])  # Display the first 5 values for a quick check
 
-for val in random_values:
-    coloringAlg(val)
+    for val in random_values:
+        coloringAlg(val)
 
-for point in points:
-    print(point)
+    for point in points:
+        print(point)
+
+
 
 def plotPoints(segment = None):
 
@@ -53,6 +56,7 @@ def has_unique_color_in_every_segment(points):
 # Test the function with your points
 result = has_unique_color_in_every_segment(points)
 if result[0]:
+    from coloringAlg import maxCol
     print (f"all segments has unique color in them, max color is {maxCol}")
 else:
     print (f"test failed, there is no unique color in the segment p{result[1][0]}~p{result[1][-1]}")
