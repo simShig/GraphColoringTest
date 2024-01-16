@@ -12,9 +12,11 @@ def runValues(n):
             onlineColoringAlg(val)
 
     else:
+        i=0
         for val in random_values:
             p = Point(val, val)
-            p.col_num = -1
+            p.col_num = i
+            i+=1
             points.append(p)
         rectangleColoringAlg()
 
