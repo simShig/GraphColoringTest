@@ -1,3 +1,4 @@
+import coloringAlgForStudents
 from Point import Point
 from coloringAlgForStudents import onlineColoringAlg, rectangleColoringAlg, points, maxCol, isOnlineAlg
 import random
@@ -14,7 +15,7 @@ def runValues(n):
     else:
         # i=0
         for index, val in enumerate(random_values):
-            p = Point(val,random_values[(index+1)% len(random_values)])
+            p = Point(val, random_values[(index + 1) % len(random_values)])
             p.col_num = 0
             # p.col_num = i
             # i+=1
@@ -25,27 +26,6 @@ def runValues(n):
     for p in points:
         print(p)
     checkCorrectness()
-
-
-def plotPoints(segment=None):
-    import matplotlib.pyplot as plt
-    try:
-        # Extracting values and color numbers for plotting
-        values = [point.valueX for point in points]
-        col_nums = [point.col_num for point in points]
-
-        plt.figure(figsize=(12, 6))
-        plt.bar(values, col_nums, color='blue')
-        if segment:
-            plt.axvspan(segment[0].valueX, segment[-1].valueX, color='yellow', alpha=0.3)
-        plt.xlabel('Point Value')
-        plt.ylabel('Color Number')
-        plt.title('Column Plot with Point Values on X-axis and Color Numbers on Y-axis')
-        plt.grid(True, axis='y')
-        plt.show()
-    except TypeError as e:
-        print(f"No point colors,therefore error in plotting:\n"
-              f"({e})")
 
 
 def has_unique_color_in_every_segment(points):
@@ -82,13 +62,20 @@ def checkCorrectness():
     if result[0]:
         from coloringAlgForStudents import maxCol
         print(f"all segments has unique color in them, max color is {findMaxCol()}")
-        plotPoints()
     else:
         print(f"test failed, there is no unique color in the segment:"
               f"\np{result[1][0]}"
               f"\n~"
               f"\np{result[1][-1]}")
-        print("segment:")
+        print("\n\tpoints at segment:")
         for point in result[1]:
             print(point)
-        plotPoints(result[1])
+
+
+##-----TEST DOWN HERE -\/----
+
+print(f"Starting test for students {coloringAlgForStudents.STUDENTS_ID} :")
+num_of_points = 100
+runValues(num_of_points)
+
+##-----TEST UP HERE --/\----
