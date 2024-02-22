@@ -1,5 +1,5 @@
 from Point import Point
-from coloringAlgForStudents import onlineColoringAlg, rectangleColoringAlg, points, maxCol, isOnlineAlg
+from coloringAlgForStudents import onlineColoringAlg, points, maxCol, isOnlineAlg
 import random
 import math
 
@@ -31,7 +31,6 @@ def getValues(n):
 def runTest(n):
     # Generate a list of 100 random values
     random_values = getValues(n)
-    random_values = [random.random() * 100 for _ in range(n)]
     # print(random_values[:5])  # Display the first 5 values for a quick check
     if isOnlineAlg:
         for val in random_values:
