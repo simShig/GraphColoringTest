@@ -1,15 +1,45 @@
 from Point import Point
 from coloringAlgForStudents import onlineColoringAlg, rectangleColoringAlg, points, maxCol, isOnlineAlg
 import random
+import math
+
+
+def getValues(n):
+    #Generate random values:
+    # valuesList = [random.random() * 100 for _ in range(n)]
+
+    #Generate ardesh sequences (of \sqrt(n) descending blocks):
+    block_size = int(math.sqrt(n))
+
+    # Initialize an empty list to store the result
+    valuesList = []
+
+    # Generate values for each block
+    for i in range(0, n, block_size):
+        # Calculate the start and end of the current block
+        start = i + 1
+        end = i + block_size
+        # Generate the numbers for the block in descending order and append to the list
+        block = list(range(end, start - 1, -1))
+        valuesList.extend(block)
+
+    print(valuesList)
+
+    return valuesList
+
+
 def runTest(n):
     # Generate a list of 100 random values
+    random_values = getValues(n)
     random_values = [random.random() * 100 for _ in range(n)]
     # print(random_values[:5])  # Display the first 5 values for a quick check
     if isOnlineAlg:
         for val in random_values:
-            onlineColoringAlg(val)
+            cn = onlineColoringAlg(val)
+            print("color is: " ,cn)
             checkCorrectness()
-
+    else:
+        print ("'isOnlineAlg' set to 'False', probably its not an OnlineAlg")
 
     print("\n\tpoint list:\n\t-----------")
     for p in points:
@@ -36,6 +66,7 @@ def checkCorrectness():
         for point in result[1]:
             print(point)
         plotPoints(result[1])
+         
 
 
 
@@ -90,4 +121,5 @@ def findMaxCol():
 
 
 if __name__ == "__main__":
+    # getValues(10000)
     runTest(10)

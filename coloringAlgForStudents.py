@@ -2,7 +2,7 @@ from Point import Point
 
 maxCol = 0
 points = []
-isOnlineAlg = False  # if RectangleAlg: =False
+isOnlineAlg = True  # if RectangleAlg: =False
 STUDENTS_ID = "123456789_987654321"  # change IDs
 
 
