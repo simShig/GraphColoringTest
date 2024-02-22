@@ -2,6 +2,8 @@ from Point import Point
 import math
 from coloringAlgForStudents import rectangleColoringAlg, points, maxCol, isOnlineAlg
 import random
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
 
 
 def getValues(n):
@@ -41,9 +43,6 @@ def createPointList(n):
 
 
 def plotPoints2D(points, segment=None):
-    # points = createPointList(100)
-    import matplotlib.pyplot as plt
-
     # Extracting X and Y values for plotting
     valuesX = [point.valueX for point in points]
     valuesY = [point.valueY for point in points]
@@ -53,15 +52,24 @@ def plotPoints2D(points, segment=None):
     # Scatter plot for all points
     plt.scatter(valuesX, valuesY, color='blue', label='Points')
 
-    # If a segment is provided, highlight it
+    # If a segment is provided, draw a rectangle around it
     if segment:
-        segmentX = [point.valueX for point in segment]
-        segmentY = [point.valueY for point in segment]
-        plt.scatter(segmentX, segmentY, color='yellow', edgecolor='black', label='Segment', alpha=0.7)
+        # Calculate the bounds of the rectangle
+        minX = min(point.valueX for point in segment)
+        maxX = max(point.valueX for point in segment)
+        minY = min(point.valueY for point in segment)
+        maxY = max(point.valueY for point in segment)
+
+        # Create the rectangle from the bounds
+        rect = Rectangle((minX, minY), maxX - minX, maxY - minY, linewidth=1, edgecolor='r', facecolor='none',
+                         label='Segment')
+
+        # Add the rectangle to the plot
+        plt.gca().add_patch(rect)
 
     plt.xlabel('X Value')
     plt.ylabel('Y Value')
-    plt.title('Scatter Plot with Points in 2D Space')
+    plt.title('Scatter Plot with Points in 2D Space and Segment Rectangle')
     plt.legend()
     plt.grid(True)
     plt.show()
@@ -90,4 +98,5 @@ def runTest(n):
 if __name__ == "__main__":
     # getValues(10000)
     points = createPointList(100)
-    plotPoints2D(points)
+    segment = points[18],points[80]
+    plotPoints2D(points,segment)
