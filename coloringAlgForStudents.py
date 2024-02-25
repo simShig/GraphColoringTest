@@ -1,3 +1,5 @@
+import random
+
 from Point import Point
 
 maxCol = 0
@@ -48,8 +50,9 @@ def rectangleColoringAlg():
 
     # your ALG here...
     for i, p in enumerate(points):
-        p.col_num = (i + 1)%13
-
+        # p.col_num = (i + 1)%17
+                # random:
+        p.col_num = int(random.random()*100)
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     print(f"current max col is:{maxCol}")
     print(f"finished running rectangleColoringAlg...")

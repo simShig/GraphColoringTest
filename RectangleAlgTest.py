@@ -119,10 +119,10 @@ def checkCorrectness():
         plotPoints2D(points)
     else:
         print(f"test failed, there is no unique color in the segment:"
-              f"\np{result[1][0]}"
-              f"\n~"
-              f"\np{result[1][-1]}")
-        print("segment:")
+              f"\n\n\tp{result[1][0]}"
+              f"\n\t\t\t~"
+              f"\n\tp{result[1][-1]}")
+        print("\nsegment:")
         for point in result[1]:
             print(point)
         plotPoints2D(points, result[1])
@@ -133,6 +133,9 @@ def runTest(n):
     # random_values = getValues(n)
     # random_values = [random.random() * 100 for _ in range(n)]
     # print(random_values[:5])  # Display the first 5 values for a quick check
+    coloringAlgForStudents.points = createPointList(n)
+
+
     if not isOnlineAlg:
 
         # for val in random_values:
@@ -152,7 +155,7 @@ def runTest(n):
 
 if __name__ == "__main__":
     # getValues(10000)
-    coloringAlgForStudents.points = createPointList(100)
+    # coloringAlgForStudents.points = createPointList(100)
     # segment = points[18],points[80] ##segment to plot
     # plotPoints2D(points,segment)
-    runTest(10)
+    runTest(100)
