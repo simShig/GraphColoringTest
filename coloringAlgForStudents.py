@@ -2,7 +2,7 @@ from Point import Point
 
 maxCol = 0
 points = []
-isOnlineAlg = True  # if RectangleAlg: =False
+isOnlineAlg = False  # if RectangleAlg: =False
 STUDENTS_ID = "123456789_987654321"  # change IDs
 
 
@@ -15,7 +15,7 @@ def onlineColoringAlg(value):
     :return: color_num
     """
     global isOnlineAlg
-    isOnlineAlg = True
+    isOnlineAlg = False
     global maxCol
     p = Point(value)
 
@@ -23,8 +23,8 @@ def onlineColoringAlg(value):
 
     # your ALG here...
 
-    color_num = maxCol      #decide point's color depending on your algorithm
-
+    color_num = maxCol + 1  # decide point's color depending on your algorithm
+    maxCol = color_num
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     p.col_num = color_num
@@ -47,6 +47,8 @@ def rectangleColoringAlg():
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # your ALG here...
+    for i, p in enumerate(points):
+        p.col_num = (i + 1)%13
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     print(f"current max col is:{maxCol}")

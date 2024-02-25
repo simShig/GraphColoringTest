@@ -36,14 +36,14 @@ def runTest(n):
         for val in random_values:
             cn = onlineColoringAlg(val)
             print("color is: " ,cn)
-            checkCorrectness()
+            # checkCorrectness()        ##unmark if you want to check correctness every step
     else:
         print ("'isOnlineAlg' set to 'False', probably its not an OnlineAlg")
 
     print("\n\tpoint list:\n\t-----------")
     for p in points:
         print(p)
-    # checkCorrectness()
+    checkCorrectness()
 
 
 
@@ -120,5 +120,4 @@ def findMaxCol():
 
 
 if __name__ == "__main__":
-    # getValues(10000)
     runTest(10)

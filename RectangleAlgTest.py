@@ -1,6 +1,7 @@
+import coloringAlgForStudents
 from Point import Point
 import math
-from coloringAlgForStudents import rectangleColoringAlg, points, maxCol, isOnlineAlg
+from coloringAlgForStudents import rectangleColoringAlg, maxCol, isOnlineAlg
 import random
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
@@ -75,28 +76,83 @@ def plotPoints2D(points, segment=None):
     plt.show()
 
 
+def has_unique_color_in_every_segment(points):
+    '''
+    check the points list for "has unique color?", if not - return problematiue segment.
+    :param points:
+    :return: True/False, segment=None
+    '''
+    points = sorted(points, key=lambda point: point.valueX)
+    n = len(points)
+    for i in range(n):
+        for j in range(i + 1, n):
+            # Extracting the segment between points[i] and points[j]
+            segment = points[i:j + 1]
+
+            # Counting the occurrences of each color in this segment
+            color_counts = {}
+            for point in segment:
+                color_counts[point.col_num] = color_counts.get(point.col_num, 0) + 1
+
+            # Checking if there's exactly one color that appears once
+            unique_colors = [color for color, count in color_counts.items() if count == 1]
+            if not (any(unique_colors) == 1):
+                return False, segment  # Found a segment without a unique color
+
+    return True, None  # All segments have a unique color
+
+
+def findMaxCol():
+    maxPoint = sorted(coloringAlgForStudents.points, key=lambda point: point.col_num)[-1]
+    maxColor = maxPoint.col_num
+    return maxColor
+
+
+def checkCorrectness():
+    # Test the function with your points
+    points = coloringAlgForStudents.points
+    result = has_unique_color_in_every_segment(points)
+    print("\n\tcorrectness:\n\t-----------")
+    if result[0]:
+        from coloringAlgForStudents import maxCol
+        print(f"all segments has unique color in them, max color is {findMaxCol()}")
+        plotPoints2D(points)
+    else:
+        print(f"test failed, there is no unique color in the segment:"
+              f"\np{result[1][0]}"
+              f"\n~"
+              f"\np{result[1][-1]}")
+        print("segment:")
+        for point in result[1]:
+            print(point)
+        plotPoints2D(points, result[1])
+
+
 def runTest(n):
     # Generate a list of 100 random values
-    random_values = getValues(n)
-    random_values = [random.random() * 100 for _ in range(n)]
+    # random_values = getValues(n)
+    # random_values = [random.random() * 100 for _ in range(n)]
     # print(random_values[:5])  # Display the first 5 values for a quick check
-    if isOnlineAlg:
-        for val in random_values:
-            cn = onlineColoringAlg(val)
-            print("color is: ", cn)
-            checkCorrectness()
+    if not isOnlineAlg:
+
+        # for val in random_values:
+        #     cn = onlineColoringAlg(val)
+        #     print("color is: ", cn)
+        # checkCorrectness()
+        print("Running RectangleColoringAlg...\n")
+        rectangleColoringAlg()
     else:
-        print("'isOnlineAlg' set to 'False', probably its not an OnlineAlg")
+        print("'isOnlineAlg' set to 'True', probably its not a RectangleColoringAlg")
 
     print("\n\tpoint list:\n\t-----------")
-    for p in points:
+    for p in coloringAlgForStudents.points:
         print(p)
-    # checkCorrectness()
-
+    checkCorrectness()
 
 
 if __name__ == "__main__":
     # getValues(10000)
-    points = createPointList(100)
-    segment = points[18],points[80]
-    plotPoints2D(points,segment)
+    coloringAlgForStudents.points = createPointList(100)
+    # segment = points[18],points[80] ##segment to plot
+    # plotPoints2D(points,segment)
+    runTest(10)
