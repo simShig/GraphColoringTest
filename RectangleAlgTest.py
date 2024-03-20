@@ -8,10 +8,12 @@ from matplotlib.patches import Rectangle
 
 
 def getValues(n):
-    # Generate random values:
-    # valuesList = [random.random() * 100 for _ in range(n)]
+#~~~~~~~~~~~RANDOM:~~~~~~~~~~~~~
 
-    # Generate ardesh sequences (of \sqrt(n) descending blocks):
+    valuesList = [random.random() * 100 for _ in range(n)]
+    return valuesList
+#~~~~~~~~~~~ARDESH:~~~~~~~~~~~~~
+# Generate ardesh sequences (of \sqrt(n) descending blocks):
     block_size = int(math.sqrt(n))
 
     # Initialize an empty list to store the result
@@ -39,8 +41,10 @@ def createPointList(n):
     for i in range(n):
         p = Point(xVals[i], yVals[i])
         pointsList.append(p)
-    print(pointsList)
+    # print(pointsList)
     return pointsList
+
+
 
 
 def plotPoints2D(points, segment=None):
@@ -51,7 +55,7 @@ def plotPoints2D(points, segment=None):
     plt.figure(figsize=(12, 6))
 
     # Scatter plot for all points
-    plt.scatter(valuesX, valuesY, color='blue', label='Points')
+    plt.scatter(valuesX, valuesY,color='blue', label='Points')
 
     # If a segment is provided, draw a rectangle around it
     if segment:
@@ -62,7 +66,7 @@ def plotPoints2D(points, segment=None):
         maxY = max(point.valueY for point in segment)
 
         # Create the rectangle from the bounds
-        rect = Rectangle((minX, minY), maxX - minX, maxY - minY, linewidth=1, edgecolor='r', facecolor='none',
+        rect = Rectangle((minX, minY), maxX - minX, maxY - minY, linewidth=3, edgecolor='r', facecolor='none',
                          label='Segment')
 
         # Add the rectangle to the plot
@@ -121,6 +125,7 @@ def checkCorrectness():
         from coloringAlgForStudents import maxCol
         print(f"all segments has unique color in them, max color is {findMaxCol()}")
         plotPoints2D(points)
+        print(f"\n\t\t\t~~~~TEST PASSED!~~~\n\t\t\t~~~~maxCol is {findMaxCol()}~~~")
     else:
         print(f"test failed, there is no unique color in the segment:"
               f"\n\n\tp{result[1][0]}"
@@ -130,6 +135,7 @@ def checkCorrectness():
         for point in result[1]:
             print(point)
         plotPoints2D(points, result[1])
+        print(f"\n\t\t\t~~~~TEST FAILED!~~~\n\t~~~~failed segment is printed above~~~")
 
 
 def runTest(n):
@@ -152,9 +158,9 @@ def runTest(n):
         print("'isOnlineAlg' set to 'True', probably its not a RectangleColoringAlg")
         print("\n\tQUITTING PROGRAM")
         return
-    print("\n\tpoint list:\n\t-----------")
-    for p in coloringAlgForStudents.points:
-        print(p)
+    # print("\n\tpoint list:\n\t-----------")
+    # for p in coloringAlgForStudents.points:
+    #     print(p)
     checkCorrectness()
 
 

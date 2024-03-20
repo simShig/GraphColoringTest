@@ -4,7 +4,7 @@ from Point import Point
 
 maxCol = 0
 points = []
-isOnlineAlg = True  # if RectangleAlg: =False
+isOnlineAlg = False  # if RectangleAlg: =False
 STUDENTS_ID = "123456789_987654321"  # change IDs
 
 
@@ -54,6 +54,6 @@ def rectangleColoringAlg():
                 # random:
         p.col_num = int(random.random()*100)
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    print(f"current max col is:{maxCol}")
+    # print(f"current max col is:{maxCol}")
     print(f"finished running rectangleColoringAlg...")
     return
