@@ -82,22 +82,26 @@ def has_unique_color_in_every_segment(points):
     :param points:
     :return: True/False, segment=None
     '''
-    points = sorted(points, key=lambda point: point.valueX)
-    n = len(points)
-    for i in range(n):
-        for j in range(i + 1, n):
-            # Extracting the segment between points[i] and points[j]
-            segment = points[i:j + 1]
+    for iter in {1, 2}:     ## two iterations of checking - segments by Y and segments by X
+        if (iter == 1):
+            points = sorted(points, key=lambda point: point.valueX)
+        else:
+            points = sorted(points, key=lambda point: point.valueY)
+        n = len(points)
+        for i in range(n):
+            for j in range(i + 1, n):
+                # Extracting the segment between points[i] and points[j]
+                segment = points[i:j + 1]
 
-            # Counting the occurrences of each color in this segment
-            color_counts = {}
-            for point in segment:
-                color_counts[point.col_num] = color_counts.get(point.col_num, 0) + 1
+                # Counting the occurrences of each color in this segment
+                color_counts = {}
+                for point in segment:
+                    color_counts[point.col_num] = color_counts.get(point.col_num, 0) + 1
 
-            # Checking if there's exactly one color that appears once
-            unique_colors = [color for color, count in color_counts.items() if count == 1]
-            if not (any(unique_colors) == 1):
-                return False, segment  # Found a segment without a unique color
+                # Checking if there's exactly one color that appears once
+                unique_colors = [color for color, count in color_counts.items() if count == 1]
+                if not (any(unique_colors) == 1):
+                    return False, segment  # Found a segment without a unique color
 
     return True, None  # All segments have a unique color
 
@@ -146,7 +150,8 @@ def runTest(n):
         rectangleColoringAlg()
     else:
         print("'isOnlineAlg' set to 'True', probably its not a RectangleColoringAlg")
-
+        print("\n\tQUITTING PROGRAM")
+        return
     print("\n\tpoint list:\n\t-----------")
     for p in coloringAlgForStudents.points:
         print(p)
